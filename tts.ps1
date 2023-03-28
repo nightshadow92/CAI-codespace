@@ -5,8 +5,9 @@ $vocoder = (tts --list_models | where {$_ -match "\/en\/"} | where {$_ -match "v
 
 $models | foreach {
 $mod = $_
+$file = ("$($mod).wav") -replace "\/","-"
 write-host "tts --model_name $mod --text $text --out_path $($mod).wav"
-#tts --model_name $mod --text $text --out_path "$($mod).wav"
+tts --model_name $mod --text $text --out_path "$($mod).wav"
 
 }
 
@@ -15,7 +16,8 @@ write-host "tts --model_name $mod --text $text --out_path $($mod).wav"
 #$mod = $_
 #$vocoder | foreach {
 #$voc = $_
-#tts --model_name $mod  --vocoder_name $voc --text $text --out_path "$($mod)-$($voc).wav"
+$file = ("$($mod)--$($voc).wav") -replace "\/","-"
+#tts --model_name $mod  --vocoder_name $voc --text $text --out_path "$($mod)--$($voc).wav"
 #}
 #}
 
