@@ -1,4 +1,10 @@
-﻿$text = ((Get-Content text.txt) -split "\n" | Where-Object { -not [string]::IsNullOrEmpty($_) -and -not [string]::IsNullOrWhiteSpace($_) })[2]
+﻿
+#chmod +x prepare-env.sh
+#./prepare-env.sh
+
+
+
+$text = ((Get-Content text.txt) -split "\n" | Where-Object { -not [string]::IsNullOrEmpty($_) -and -not [string]::IsNullOrWhiteSpace($_) })[2]
 
 $models = (tts --list_models | where {$_ -match "\/en\/"} | where {$_ -match "tts_models"}) -replace "^.*?\d{1,2}: "
 $vocoder = (tts --list_models | where {$_ -match "\/en\/"} | where {$_ -match "vocoder"}) -replace "^.*?\d{1,2}: "
